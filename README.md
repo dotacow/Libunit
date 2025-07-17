@@ -7,8 +7,8 @@ project structure:
 	loader loads tests into linked list of t_unit_test
 	t_unit_test struct:
 	{
-		int	f(void);
-		char	*test_functuion;
+		int	(*)(void);
+		char	*test_name;
 		t_unit_test *next;
 	}
 		--load_test(t_unit_test *head,&function func)
