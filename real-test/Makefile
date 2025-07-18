@@ -1,33 +1,47 @@
-LIBDIR =../framework/libunit/
-LIB = $(LIBDIR)/libunit.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBDIR)
+LIBUDIR   = ../framework
+LIBFTDIR  = ../libft
+ODIR      = ofiles
 
-SRCS = main.c 00_launcher.c 01_ok.c 02_ko.c 03_sigsev.c
+LIBU      = $(LIBUDIR)/libunit.a
+LIBFT     = $(LIBFTDIR)/libft.a
 
+CC        = cc
+CFLAGS    = -Wall -Wextra -Werror -I$(LIBUDIR) -I$(LIBFTDIR)
 
-ODIR = ofiles
-OFILES := $(addprefix ofiles/,$(notdir $(SRC:.c=.o)))
+SRCS      = gnl.c main.c 00_launcher.c 01_empty_file.c
+OBJS      = $(addprefix $(ODIR)/,$(SRCS:.c=.o))
+NAME      = tester
 
-NAME = tester
+all: $(LIBU) $(LIBFT) $(NAME)
 
-ofiles/%.o: srcs/%.c includes/philo.h | $(ODIR)
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) $(LIBU) $(LIBFT) -o $(NAME)
+
+$(ODIR)/%.o: %.c tests.h | $(ODIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
+$(ODIR):
+	mkdir -p $(ODIR)
 
-$(NAME): $(OFILES)
-	$(CC) $(OFILES) -o $(NAME) -fsanitize=thread
+$(LIBU):
+	$(MAKE) -C $(LIBUDIR)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFTDIR)
+
+test: all
+	./$(NAME)
 
 clean:
-	rm -rf ofiles
+	rm -rf $(ODIR)
+	$(MAKE) -C $(LIBUDIR) clean
+	$(MAKE) -C $(LIBFTDIR) clean
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
+	$(MAKE) -C $(LIBUDIR) fclean
+	$(MAKE) -C $(LIBFTDIR) fclean
 
 re: fclean all
 
-$(ODIR):
-	mkdir -p ofiles
-
-.PHONY: dirs all clean fclean re
+.PHONY: all test clean fclean re

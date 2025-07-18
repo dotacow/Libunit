@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   01_empty_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 22:09:23 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:49:38 by yokitane         ###   ########.fr       */
+/*   Created: 2025/07/18 16:52:45 by yokitane          #+#    #+#             */
+/*   Updated: 2025/07/18 16:54:33 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../framework/libunit.h"
 #include "tests.h"
 
-int main(void)
+int empty_file()
 {
-	return (test_launcher());
+	int fd;
+	char *line;
+
+	fd = open("txtfiles/empty.txt", O_RDONLY);
+	if (fd < 0)
+		return (-1);
+
+	line = get_next_line(fd);
+	if (line != NULL)
+	{
+		free(line);
+		close(fd);
+		return (-1);
+	}
+	close(fd);
+	return (0);
 }
