@@ -3,43 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 17:04:55 by msalim            #+#    #+#             */
-/*   Updated: 2024/08/27 17:16:13 by msalim           ###   ########.fr       */
+/*   Created: 2024/08/29 05:15:51 by amashhad          #+#    #+#             */
+/*   Updated: 2024/09/04 03:35:40 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-#include <string.h>
+
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	src_len;
 	size_t	i;
 
-	src_len = 0;
 	i = 0;
-	while (src[src_len])
-		src_len++;
 	if (size == 0)
-		return (src_len);
-	while (i < size - 1 && src[i])
+		return (ft_strlen(src));
+	while (src[i] != '\0' && i < size - 1)
 	{
 		dst[i] = src[i];
 		i++;
 	}
 	dst[i] = '\0';
-	return (src_len);
+	while (src[i] != '\0')
+		i++;
+	return (i);
 }
-/*int main(void)
-{
-	char src[] = "Hello, World!";
-	char dst[11];
-
-	size_t len = ft_strlcpy(dst, src, sizeof(dst));
-
-	printf("Destination: %s\n", dst);
-	printf("Source length: %zu\n", len)
-
-	return (0);
-}*/

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 17:07:15 by msalim            #+#    #+#             */
-/*   Updated: 2025/02/15 17:09:31 by msalim           ###   ########.fr       */
+/*   Created: 2024/09/18 09:33:50 by amashhad          #+#    #+#             */
+/*   Updated: 2025/01/11 08:32:23 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "ft_printf.h"
 
-char	*ft_strncpy(char *dest, char *src, size_t n)
+int	ft_putstr(char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (src[i] && i < n)
+	if (!s)
 	{
-		dest[i] = src[i];
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (s[i])
+	{
+		ft_putchar(s[i]);
 		i++;
 	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
+	return (i);
 }

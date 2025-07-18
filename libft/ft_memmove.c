@@ -3,40 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 17:01:30 by msalim            #+#    #+#             */
-/*   Updated: 2024/09/01 15:55:35 by msalim           ###   ########.fr       */
+/*   Created: 2024/09/03 03:12:42 by amashhad          #+#    #+#             */
+/*   Updated: 2024/09/05 00:34:42 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-/*line 10 : handle overlapping by reading from the end*/
-/*line 19 : copying normally if no overlaps are happening*/
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	unsigned char		*des;
-	const unsigned char	*sr;
+	unsigned char		*t1;
+	unsigned const char	*t2;
 
-	if (!dest && !src)
-		return (dest);
-	des = (unsigned char *)dest;
-	sr = (const unsigned char *)src;
-	if (sr < des && des < sr + n)
+	t1 = dst;
+	t2 = src;
+	if (dst <= src)
+		return (ft_memcpy(dst, src, n));
+	if (src < dst)
 	{
-		sr += n;
-		des += n;
-		while (n--)
+		while (n > 0)
 		{
-			*(--des) = *(--sr);
+			t1[n - 1] = t2[n - 1];
+			n--;
 		}
 	}
-	else
-	{
-		while (n--)
-		{
-			*des++ = *sr++;
-		}
-	}
-	return (dest);
+	return (dst);
 }

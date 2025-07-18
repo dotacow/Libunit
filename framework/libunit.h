@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit.h                                             :+:      :+:    :+:   */
+/*   libunit.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:40:59 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/17 21:59:34 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:42:44 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include "../libft/libft.h"
+#include <stdio.h>
 typedef struct s_unit_test
 {
 	int	(*f)(void);
-	char	*test_name;
+	char	*testname;
+	char	*testedname;
 	struct s_unit_test *next;
 }	t_unit_test;
 
@@ -21,8 +27,9 @@ typedef struct s_unit_test
  * Loads a test function into the unit test structure.
  * @param tests Pointer to the unit test linked list.
  * @param f Pointer to the function to be tested.
+ * @return 0 if successful, 1 if memory allocation fails.
  */
-void	load_test(t_unit_test *tests, int (*f)(void));
+int	load_test(t_unit_test *tests,char *testname, int (*f)(void));
 
 /**
  * Deletes the unit test structure and frees allocated memory.

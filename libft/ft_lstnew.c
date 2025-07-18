@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 18:44:11 by msalim            #+#    #+#             */
-/*   Updated: 2024/12/03 18:44:23 by msalim           ###   ########.fr       */
+/*   Created: 2024/09/10 01:09:20 by amashhad          #+#    #+#             */
+/*   Updated: 2024/09/10 01:20:27 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	i;
+	t_list	*lst;
 
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	lst = malloc(sizeof(t_list));
+	if (!lst)
+		return (NULL);
+	lst -> content = content;
+	lst -> next = NULL;
+	return (lst);
 }

@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 15:44:19 by msalim            #+#    #+#             */
-/*   Updated: 2024/08/27 13:51:02 by msalim           ###   ########.fr       */
+/*   Created: 2024/08/29 04:21:23 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/01 20:06:20 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
-#include <unistd.h>
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(const char *s)
 {
-	int	len;
+	size_t	i;
 
-	len = 0;
-	while (str[len] != '\0')
-		len++;
-	return (len);
+	i = 0;
+	if (!s)
+		return (i);
+	while (s[i])
+		i++;
+	return (i);
 }
-/*int	main(void)
-{
-	printf("%ld\n", ft_strlen("hel"));
-}*/
