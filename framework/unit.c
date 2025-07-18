@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:41:03 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:40:46 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/18 17:22:54 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,10 @@ int load_test(t_unit_test *tests, char *testname, int (*f)(void))
 void delete_list(t_unit_test *tests)
 {
 	t_unit_test *temp;
-	temp = tests;
 	while (tests)
 	{
 		temp = tests->next;
-		if (tests)
-			free(tests);
-		tests = NULL;
+		free(tests);
 		tests = temp;
 	}
 }
@@ -73,13 +70,23 @@ static	int catch_signal(t_unit_test *test,int status,char *testedname)
 	return (-1);
 }
 
+static int child_process(t_unit_test *test,t_unit_test *head)
+{
+	int (*func)(void);
+
+	func = test->f;
+	delete_list(head);
+	return (func());
+}
+
 int		launch_tests(t_unit_test *tests, char *testedname)
 {
 	pid_t wpid;
-	int ret;
 	int exitcode;
 	int status;
+	t_unit_test *head;
 
+	head = tests;
 	exitcode = 0;
 	tests = tests->next;
 	while (tests)
@@ -90,12 +97,11 @@ int		launch_tests(t_unit_test *tests, char *testedname)
 		if (wpid)
 		{
 			wait(&status);
-			ret = catch_signal(tests, status,testedname);
-			if (ret != 0)
+			if (catch_signal(tests, status,testedname) != 0)
 				exitcode = -1;
 		}
 		else
-			exit(tests->f());
+			exit(child_process(tests,head));
 		tests = tests->next;
 	}
 	return (exitcode);

@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 22:09:23 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:49:38 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/18 17:24:39 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 int main(void)
 {
-	return (test_launcher());
+	return (gnl_launcher());
 }

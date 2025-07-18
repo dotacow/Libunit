@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:09:50 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:54:13 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/18 17:24:29 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 //thing to test:
 char *get_next_line(int fd);
-int test_launcher(void);
+int gnl_launcher(void);
 //actual tests:
 int empty_file(void);
 int no_newline(void);
