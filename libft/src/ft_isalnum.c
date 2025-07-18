@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: salshaha <salshaha@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 22:09:23 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:49:38 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/01 11:27:07 by salshaha          #+#    #+#             */
+/*   Updated: 2024/09/02 14:50:10 by salshaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../framework/libunit.h"
-#include "tests.h"
+#include "libft.h"
 
-int main(void)
+int	ft_isalnum(int c)
 {
-	return (test_launcher());
+	if (c >= '0' && c <= '9')
+		return (1);
+	else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
 }
+/*int main(void)
+{
+	char c = '(';
+	printf("%d",ft_isalnum(c));
+}*/

@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: salshaha <salshaha@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 22:09:23 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:49:38 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/01 11:31:06 by salshaha          #+#    #+#             */
+/*   Updated: 2024/09/02 14:50:23 by salshaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../framework/libunit.h"
-#include "tests.h"
+#include "libft.h"
 
-int main(void)
+int	ft_isprint(int c)
 {
-	return (test_launcher());
+	if (c >= 32 && c <= 126)
+		return (1);
+	else
+		return (0);
 }
+/*int main (void)
+{
+	char c ='$';
+	printf("%d",ft_isprint(c));
+}*/

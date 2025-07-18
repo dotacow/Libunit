@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:41:03 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 15:59:42 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:40:46 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void delete_list(t_unit_test *tests)
 	}
 }
 
-static	int catch_signal(t_unit_test *test,int status)
+static	int catch_signal(t_unit_test *test,int status,char *testedname)
 {
 	int exitcode;
 
@@ -53,27 +53,27 @@ static	int catch_signal(t_unit_test *test,int status)
 		exitcode = WEXITSTATUS(status);
 		if (exitcode == 1)
 		{
-			printf("%s: %s : [KO]\n",test->testedname,test->testname);
+			printf("%s: %s : [KO]\n",testedname,test->testname);
 			return (-1);
 		}
 		else
-			printf("%s: %s : [OK]\n",test->testedname,test->testname);
+			printf("%s: %s : [OK]\n",testedname,test->testname);
 		return(0);
 	}
  	if (WIFSIGNALED(status))
 	{
 		exitcode = WTERMSIG(status);
 		if (exitcode == SIGBUS)
-			printf("%s: %s : [SIGBUS]\n",test->testedname,test->testname);
+			printf("%s: %s : [SIGBUS]\n",testedname,test->testname);
 		else if (exitcode == SIGSEGV)
-			printf("%s: %s : [SIGSEGV]\n",test->testedname,test->testname);
+			printf("%s: %s : [SIGSEGV]\n",testedname,test->testname);
 		else
-			printf("%s: %s : [KO]\n",test->testedname,test->testname);
+			printf("%s: %s : [KO]\n",testedname,test->testname);
 	}
 	return (-1);
 }
 
-int		launch_tests(t_unit_test *tests)
+int		launch_tests(t_unit_test *tests, char *testedname)
 {
 	pid_t wpid;
 	int ret;
@@ -81,6 +81,7 @@ int		launch_tests(t_unit_test *tests)
 	int status;
 
 	exitcode = 0;
+	tests = tests->next;
 	while (tests)
 	{
 		wpid = fork();
@@ -89,7 +90,7 @@ int		launch_tests(t_unit_test *tests)
 		if (wpid)
 		{
 			wait(&status);
-			ret = catch_signal(tests, status);
+			ret = catch_signal(tests, status,testedname);
 			if (ret != 0)
 				exitcode = -1;
 		}

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: salshaha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 22:09:23 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:49:38 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/08 14:08:36 by salshaha          #+#    #+#             */
+/*   Updated: 2024/09/11 10:39:47 by salshaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../framework/libunit.h"
-#include "tests.h"
+#include "libft.h"
 
-int main(void)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	return (test_launcher());
+	new->next = *lst;
+	*lst = new;
 }

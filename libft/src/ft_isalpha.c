@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: salshaha <salshaha@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 22:09:23 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:49:38 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/01 11:28:38 by salshaha          #+#    #+#             */
+/*   Updated: 2024/09/02 14:50:13 by salshaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../framework/libunit.h"
-#include "tests.h"
+#include "libft.h"
 
-int main(void)
+int	ft_isalpha(int c)
 {
-	return (test_launcher());
+	if ((c > 96 && c < 123) || (c > 64 && c < 91))
+		return (1);
+	else
+		return (0);
 }
+/*int main (void)
+{
+	char s='f';
+	printf("%d",ft_isalpha(s));
+}*/

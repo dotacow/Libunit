@@ -1,66 +1,38 @@
-NAME	= libft.a
-CC	= cc
-CFLAGS	= -Wall -Wextra -Werror
-AR	= ar
-ARFLAGS	= rcs
-RM	= rm -rf
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -Iinclude
 
-SRC	=	ft_atoi ft_bzero			\
-		ft_calloc ft_putendl_fd			\
-		ft_itoa ft_putchar_fd			\
-		ft_putstr_fd ft_striteri		\
-		ft_memchr ft_memcmp			\
-		ft_memcpy ft_isalnum			\
-		ft_isalpha ft_isascii			\
-		ft_isdigit ft_isprint			\
-		ft_memmove ft_memset			\
-		ft_split ft_strchr			\
-		ft_strdup ft_strjoin			\
-		ft_strlcat ft_strlcpy			\
-		ft_strlen ft_strmapi			\
-		ft_strncmp ft_strnstr			\
-		ft_strrchr ft_strtrim			\
-		ft_substr ft_tolower			\
-		ft_toupper ft_putnbr_fd			\
-		ft_lstadd_back ft_lstadd_front		\
-		ft_lstclear ft_lstdelone		\
-		ft_lstiter ft_lstlast			\
-		ft_lstsize ft_lstnew			\
-		ft_lstmap ft_realloc			\
-		ft_farray ft_printf			\
-		ft_putchar ft_putnbr			\
-		ft_putstr ft_putuns			\
-		ft_putvoid ft_putitox			\
-		get_next_line get_next_line_utils	\
-		ft_atol ft_isspace	ft_cpyarr	\
-		ft_joinstrjoin	ft_printarr ft_addprintarr \
-		ft_arrlen	ft_addarr	ft_subarr	\
-		ft_srchrarr	ft_strcmp	ft_arr_srch	\
-		ft_locate_str rhcrts\
+SRC_DIR = src
+SRCS = ft_strlcat.c ft_split.c ft_strtrim.c ft_striteri.c ft_strmapi.c ft_strjoin.c \
+       ft_itoa.c ft_putnbr_fd.c ft_putendl_fd.c ft_putstr_fd.c ft_putchar_fd.c \
+       ft_strlcpy.c ft_substr.c ft_strdup.c ft_calloc.c ft_memmove.c ft_isdigit.c \
+       ft_isalpha.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c \
+       ft_bzero.c ft_memcpy.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strncmp.c \
+       ft_memchr.c ft_memcmp.c ft_strrchr.c ft_strnstr.c ft_atoi.c
+SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
+OBJS := $(SRCS:.c=.o)
 
+BONUS_SRCS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
+             ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
+             ft_lstclear_bonus.c ft_lstiter_bonus.c
+BONUS_SRCS := $(addprefix $(SRC_DIR)/, $(BONUS_SRCS))
+OBJ_B := $(BONUS_SRCS:.c=.o)
 
-SRCS	= $(addsuffix .c, $(SRC))
-OBJ_DIR	= obj
-OBJS	= $(addprefix $(OBJ_DIR)/, $(SRC:=.o))
+NAME = libft.a
 
-
-all:	$(NAME)
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	ar rcs $@ $^
+
+bonus: $(OBJS) $(OBJ_B)
+	ar rcs $(NAME) $(OBJS) $(OBJ_B)
 
 clean:
-	@$(RM) $(OBJ_DIR)
+	rm -f $(OBJS) $(OBJ_B)
 
 fclean: clean
-	@$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

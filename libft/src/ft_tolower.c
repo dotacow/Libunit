@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: salshaha <salshaha@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 22:09:23 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:49:38 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/01 11:36:46 by salshaha          #+#    #+#             */
+/*   Updated: 2024/09/02 14:51:46 by salshaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../framework/libunit.h"
-#include "tests.h"
+#include "libft.h"
 
-int main(void)
+int	ft_tolower(int c)
 {
-	return (test_launcher());
+	char	x;
+
+	if (c >= 65 && c <= 90)
+	{
+		x = c + 32;
+		return (x);
+	}
+	else
+		return (c);
 }
+/*int main(void)
+{
+	char	c = 'H';
+	printf("%c",ft_tolower(c));
+}*/

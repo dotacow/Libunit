@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:03:32 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:39:26 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:52:39 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ int test_launcher(void)
 	if (!tests)
 		return (1);
 	tests->next = NULL;
-	load_test(tests, "ok_test", ok_test);
-	load_test(tests, "ko_test", ko_test);
-	load_test(tests, "signal_test", signal_test);
+	load_test(tests, "empty_file", &empty_file);
 	ret = launch_tests(tests,"tester");
 	delete_list(tests);
 	return (ret);
