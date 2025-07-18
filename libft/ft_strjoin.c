@@ -3,47 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/30 17:46:51 by msalim            #+#    #+#             */
-/*   Updated: 2025/03/24 10:24:58 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/09 07:18:58 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/01 20:22:01 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strcat(char *s1, const char *s2)
+char	*ft_strjoin(const char *str1, const char *str2)
 {
-	size_t	i;
-	size_t	j;
+	int		i;
+	char	*joined;
 
-	j = 0;
-	i = 0;
-	while (s1[i] != '\0')
-		i++;
-	while (s2[j] != '\0')
-	{
-		s1[i++] = s2[j++];
-	}
-	s1[i] = '\0';
-	return (s1);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*ptr;
-	size_t	len_s1;
-	size_t	len_s2;
-
-	if (!s1 || !s2)
+	i = -1;
+	if (!str1)
+		str1 = ft_strdup("");
+	if (!str2)
+		str2 = ft_strdup("");
+	if (!str1 && !str2)
 		return (NULL);
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	ptr = malloc(len_s1 + len_s2 + 1);
-	if (ptr == NULL)
+	joined = ft_calloc(ft_strlen(str1) + ft_strlen(str2) + 1, sizeof(char ));
+	if (!joined)
 		return (NULL);
-	ptr[0] = '\0';
-	ft_strcat(ptr, s1);
-	ft_strcat(ptr, s2);
-	return (ptr);
+	while (str1[++i] != '\0')
+		joined[i] = str1[i];
+	i = -1;
+	while (str2[++i] != '\0')
+		joined[ft_strlen(str1) + i] = str2[i];
+	return (joined);
 }

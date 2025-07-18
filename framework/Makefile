@@ -21,7 +21,6 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-# Rebuild everything
 re: fclean all
 
 .PHONY: all clean fclean re

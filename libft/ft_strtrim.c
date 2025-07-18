@@ -3,38 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/31 16:58:56 by msalim            #+#    #+#             */
-/*   Updated: 2024/09/01 15:55:30 by msalim           ###   ########.fr       */
+/*   Created: 2024/09/02 10:36:07 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/01 20:27:01 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-/*printf("%ld\n",end);*/
-/*printf("%ld\n",start);*/
-/*line 13 : incrementing the start and checking each character using strchr*/
-/*line 15 : and using the value of start to know where to stop*/
+static	size_t	ft_firstpart(char const *s1, char const *set)
+{
+	size_t	i;
+	size_t	c;
+
+	i = 0;
+	c = 0;
+	while (set[c] && s1[i])
+	{
+		if (set[c] == s1[i])
+		{
+			i++;
+			c = 0;
+		}
+		else
+		{
+			c++;
+		}
+	}
+	return (i);
+}
+
+static	size_t	ft_lastpart(char const *s1, char const *set)
+{
+	size_t	i;
+	size_t	c;
+
+	i = ft_strlen(s1) - 1;
+	c = 0;
+	while (set[c] && i)
+	{
+		if (set[c] == s1[i])
+		{
+			i--;
+			c = 0;
+		}
+		else
+		{
+			c++;
+		}
+	}
+	return (i);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	str_len;
-	size_t	start;
-	size_t	end;
-	char	*m_s;
+	size_t	p1;
+	size_t	p2;
+	size_t	i;
+	char	*trim;
 
-	str_len = ft_strlen(s1);
-	start = 0;
-	end = str_len;
-	if (!s1 || !set)
+	if (!s1)
 		return (NULL);
-	while (start <= str_len && ft_strchr(set, s1[start]))
-		start++;
-	while (end > start && ft_strchr(set, s1[end - 1]))
-		end--;
-	m_s = ft_substr(s1, start, end - start);
-	return (m_s);
+	p1 = ft_firstpart (s1, set);
+	p2 = 1 + ft_lastpart (s1, set);
+	i = 0;
+	if (p2 < p1)
+		return (ft_strdup(""));
+	if (!set)
+		return (ft_strdup(""));
+	trim = malloc(sizeof(char) * ((p2 - p1) + 1));
+	if (!trim)
+		return (NULL);
+	while ((p2 - p1) != 0)
+	{
+		trim[i] = s1[p1];
+		p1++;
+		i++;
+	}
+	trim[i] = '\0';
+	return (trim);
 }
-/*int	main(void)
-{
-	printf("%s\n", ft_strtrim("\nlaaastrl","l\na"));
-}*/

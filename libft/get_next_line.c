@@ -3,93 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 19:36:54 by msalim            #+#    #+#             */
-/*   Updated: 2024/12/03 19:13:24 by msalim           ###   ########.fr       */
+/*   Created: 2024/11/20 17:11:46 by amashhad          #+#    #+#             */
+/*   Updated: 2025/01/24 00:10:57 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-static char	*ft_free(char *buf, char *remain)
+#include "get_next_line.h"
+
+char	*ft_free_gnl(char **str)
 {
-	if (buf)
-		free(buf);
-	if (remain)
-		free(remain);
+	free(*str);
+	*str = NULL;
 	return (NULL);
 }
 
-static void	set_line(char **last, char *first)
+char	*clean_storage(char *line)
 {
-	char	*line;
-	int		i;
+	char	*new_line;
+	char	*ptr;
+	int		len;
 
-	i = 0;
-	while ((*last)[i] != '\n' && (*last)[i] != '\0')
-		i++;
-	if ((*last)[i] == '\n')
+	ptr = ft_strchr_gnl(line, '\n');
+	if (!ptr)
 	{
-		line = ft_substr(*last, 0, i + 1);
-		if (!line)
-		{
-			free(*last);
-			*last = NULL;
-			return ;
-		}
-		ft_strcpy(first, *last + i + 1);
+		new_line = NULL;
+		return (ft_free_gnl(&line));
 	}
 	else
-	{
-		line = ft_strdup(*last);
-		first[0] = '\0';
-	}
-	free(*last);
-	*last = line;
+		len = (ptr - line) + 1;
+	if (!line[len])
+		return (ft_free_gnl(&line));
+	new_line = ft_substr_gnl(line, len, ft_strlen(line) - len);
+	ft_free_gnl(&line);
+	if (!new_line)
+		return (NULL);
+	return (new_line);
 }
 
-static char	*fill_line(int fd, char *left, char *buffer)
+char	*new_buf(char *line)
 {
-	int		bytes;
-	char	*tmp;
-	char	*result;
+	char	*buf;
+	char	*ptr;
+	int		len;
 
-	result = ft_strdup(left);
-	while (!ft_strchr(result, '\n'))
+	ptr = ft_strchr_gnl(line, '\n');
+	len = (ptr - line) + 1;
+	buf = ft_substr_gnl(line, 0, len);
+	if (!buf)
+		return (NULL);
+	return (buf);
+}
+
+char	*readbuf(int fd, char *line)
+{
+	int		byte;
+	char	*buffer;
+
+	byte = 1;
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (ft_free_gnl(&line));
+	buffer[0] = '\0';
+	while (byte > 0 && !ft_strchr_gnl(buffer, '\n'))
 	{
-		bytes = read(fd, buffer, BUFFER_SIZE);
-		if (bytes < 0)
-			return (ft_free(buffer, result));
-		if (*result == '\0' && bytes == 0)
-			return (ft_free(buffer, result));
-		if (bytes == 0)
-			break ;
-		buffer[bytes] = '\0';
-		tmp = ft_strjoin(result, buffer);
-		free(result);
-		result = tmp;
+		byte = read (fd, buffer, BUFFER_SIZE);
+		if (byte > 0)
+		{
+			buffer[byte] = '\0';
+			line = ft_strjoin_gnl(line, buffer);
+		}
 	}
 	free(buffer);
-	return (result);
+	if (byte == -1)
+		return (ft_free_gnl(&line));
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*buffer;
-	static char	line[BUFFER_SIZE + 1];
-	char		*new_line;
+	static char	*line[FD_SIZE] = {NULL};
+	char		*buf;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0)
 		return (NULL);
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!buffer)
+	if ((line[fd] && !ft_strchr_gnl(line[fd], '\n')) || !line[fd])
+		line[fd] = readbuf (fd, line[fd]);
+	if (!line[fd])
 		return (NULL);
-	new_line = fill_line(fd, line, buffer);
-	if (!new_line)
-	{
-		line[0] = '\0';
-		return (NULL);
-	}
-	set_line(&new_line, line);
-	return (new_line);
+	buf = new_buf(line[fd]);
+	if (!buf)
+		return (ft_free_gnl(&line[fd]));
+	line[fd] = clean_storage(line[fd]);
+	return (buf);
 }

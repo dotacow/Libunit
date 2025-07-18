@@ -3,33 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 16:48:07 by msalim            #+#    #+#             */
-/*   Updated: 2025/05/05 22:47:37 by yokitane         ###   ########.fr       */
+/*   Created: 2024/08/28 22:31:30 by amashhad          #+#    #+#             */
+/*   Updated: 2025/01/12 15:45:22 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long int	ft_atoi(const char *nptr)
-{
-	int			sign;
-	long int	result;
+#include "libft.h"
 
-	sign = 1;
-	result = 0;
-	while (*nptr == ' ' || *nptr == '\t' || *nptr == '\n' || *nptr == '\v'
-		|| *nptr == '\f' || *nptr == '\r')
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
+static	int	ft_sign(const char *nptr, int i)
+{
+	if (((nptr[i] == '+') || (nptr[i] == '-')) && (ft_isdigit(nptr[i + 1])))
 	{
-		if (*nptr == '-')
-			sign *= -1;
-		nptr++;
+		if ((nptr[i] == '+') || (ft_isdigit(nptr[i])))
+			return (1);
+		if (nptr[i] == '-')
+			return (-1);
 	}
-	while (*nptr >= '0' && *nptr <= '9')
+	if (ft_isdigit(nptr[i]))
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	i;
+	int	nbr;
+	int	sign;
+
+	i = 0;
+	nbr = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || (nptr[i] == 32))
+		i++;
+	sign = ft_sign(nptr, i);
+	if (sign == 0)
+		return (0);
+	if (!ft_isdigit(nptr[i]))
+		i++;
+	while (ft_isdigit(nptr[i]))
 	{
-		result = result * 10 + (*nptr - '0');
-		nptr++;
+		nbr *= 10;
+		nbr = nbr + (nptr[i] - '0');
+		i++;
 	}
-	return (result * sign);
+	return (sign * nbr);
 }

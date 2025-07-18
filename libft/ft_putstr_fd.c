@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/01 17:31:10 by msalim            #+#    #+#             */
-/*   Updated: 2024/09/01 18:13:14 by msalim           ###   ########.fr       */
+/*   Created: 2024/09/09 21:10:33 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/01 20:18:48 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	while (*s)
+	if (!s)
 	{
-		write(fd, s, 1);
-		s++;
+		ft_putendl_fd("(putstr err, no str)", fd);
+		exit(2);
 	}
+	write(fd, s, ft_strlen(s));
 }

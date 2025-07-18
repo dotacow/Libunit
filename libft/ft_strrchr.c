@@ -3,33 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalim <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 18:56:36 by msalim            #+#    #+#             */
-/*   Updated: 2024/08/28 19:50:55 by msalim           ###   ########.fr       */
+/*   Created: 2024/08/29 05:36:46 by amashhad          #+#    #+#             */
+/*   Updated: 2025/03/01 20:26:27 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
-	char	p;
+	size_t			i;
+	unsigned char	ch;
 
-	p = c;
-	i = 0;
-	while (s[i])
-		i++;
-	while (i >= 0)
+	if (!s)
 	{
-		if (s[i] == p)
-			return ((char *)&s[i]);
+		ft_putendl_fd("(strrchr error, no string)", 2);
+		exit(1);
+	}
+	ch = c;
+	i = ft_strlen(s);
+	if (!ch)
+		return ((char *)(s) + i);
+	while (i > 0)
+	{
+		if (s[i] == ch)
+			return ((char *)(s) + i);
 		i--;
 	}
+	if (s[0] == ch)
+		return ((char *)(s) + i);
 	return (0);
 }
-/*int	main(void)
-{
-	printf("%s\n",ft_strrchr("teste", 1125));
-}*/
