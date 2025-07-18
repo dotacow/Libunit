@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_launcher.c                                      :+:      :+:    :+:   */
+/*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 15:03:32 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:39:26 by yokitane         ###   ########.fr       */
+/*   Created: 2025/07/18 16:09:50 by yokitane          #+#    #+#             */
+/*   Updated: 2025/07/18 16:12:23 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
-#include "../framework/libunit.h"
-
-int test_launcher(void)
-{
-	t_unit_test	*tests;
-	int			ret;
-
-	tests = malloc(sizeof(t_unit_test));
-	if (!tests)
-		return (1);
-	tests->next = NULL;
-	load_test(tests, "ok_test", ok_test);
-	load_test(tests, "ko_test", ko_test);
-	load_test(tests, "signal_test", signal_test);
-	ret = launch_tests(tests,"tester");
-	delete_list(tests);
-	return (ret);
-}
+int	ok_test (void);
+int	ko_test (void);
+int	signal_test (void);
+int test_launcher(void);

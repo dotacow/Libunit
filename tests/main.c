@@ -6,7 +6,14 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 22:09:23 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/17 22:32:39 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:12:26 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "../framework/libunit.h"
+#include "tests.h"
+
+int main(void)
+{
+	return (test_launcher());
+}
