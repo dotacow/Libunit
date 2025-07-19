@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_sigsev.c                                        :+:      :+:    :+:   */
+/*   ft_getlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 16:32:04 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/19 15:40:11 by yokitane         ###   ########.fr       */
+/*   Created: 2024/10/27 20:23:46 by yokitane          #+#    #+#             */
+/*   Updated: 2024/10/28 16:14:59 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int signal_test(void)
+int	ft_getlen(int size, char **strs, char *sep)
 {
-	int *ptr = NULL;
-	*ptr = 42;
-	return (0);
+	int	len;
+	int	i;
+
+	len = 0;
+	i = 0;
+	while (i < size)
+	{
+		len += ft_strlen(strs[i]);
+		if (i < size - 1)
+			len += ft_strlen(sep);
+		i++;
+	}
+	return (len);
 }

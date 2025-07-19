@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_sigsev.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 16:32:04 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/19 15:40:11 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/03 15:32:05 by yokitane          #+#    #+#             */
+/*   Updated: 2024/09/03 16:15:55 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int signal_test(void)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	int *ptr = NULL;
-	*ptr = 42;
-	return (0);
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
 }

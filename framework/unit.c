@@ -6,13 +6,13 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:41:03 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 17:22:54 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 16:05:19 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libunit.h"
 
-int load_test(t_unit_test *tests, char *testname, int (*f)(void))
+int load_test(t_unit_test *tests, char *testname, int (*f)(void),int silent)
 {
 	t_unit_test *head;
 	t_unit_test *new;
@@ -23,6 +23,7 @@ int load_test(t_unit_test *tests, char *testname, int (*f)(void))
 	new->next = NULL;
 	new->testname = testname;
 	new->f = f;
+	new->silent = silent;
 	head = tests;
 	while(head->next)
 		head = head->next;
@@ -48,24 +49,24 @@ static	int catch_signal(t_unit_test *test,int status,char *testedname)
 	if (WIFEXITED(status))
 	{
 		exitcode = WEXITSTATUS(status);
-		if (exitcode == 1)
+		if (exitcode != 0 && !test->silent)
+			ft_printf("%s: %s : [KO]\n",testedname,test->testname);
+		if (exitcode == 0)
 		{
-			printf("%s: %s : [KO]\n",testedname,test->testname);
-			return (-1);
+			if (!test->silent)
+				ft_printf("%s: %s : [OK]\n",testedname,test->testname);
+			return(0);
 		}
-		else
-			printf("%s: %s : [OK]\n",testedname,test->testname);
-		return(0);
 	}
  	if (WIFSIGNALED(status))
 	{
 		exitcode = WTERMSIG(status);
-		if (exitcode == SIGBUS)
-			printf("%s: %s : [SIGBUS]\n",testedname,test->testname);
-		else if (exitcode == SIGSEGV)
-			printf("%s: %s : [SIGSEGV]\n",testedname,test->testname);
-		else
-			printf("%s: %s : [KO]\n",testedname,test->testname);
+		if (exitcode == SIGBUS && !test->silent)
+			ft_printf("%s: %s : [SIGBUS]\n",testedname,test->testname);
+		else if (exitcode == SIGSEGV && !test->silent)
+			ft_printf("%s: %s : [SIGSEGV]\n",testedname,test->testname);
+		else if (!test->silent)
+			ft_printf("%s: %s : [KO]\n",testedname,test->testname);
 	}
 	return (-1);
 }

@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_sigsev.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 16:32:04 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/19 15:40:11 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/07 19:50:27 by yokitane          #+#    #+#             */
+/*   Updated: 2024/09/07 20:15:45 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int signal_test(void)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int *ptr = NULL;
-	*ptr = 42;
-	return (0);
+	t_list	*last;
+
+	if (!new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	last = ft_lstlast(*lst);
+	last->next = new;
 }

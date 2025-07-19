@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_sigsev.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 16:32:04 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/19 15:40:11 by yokitane         ###   ########.fr       */
+/*   Created: 2024/09/03 15:38:15 by yokitane          #+#    #+#             */
+/*   Updated: 2024/11/14 16:39:20 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int signal_test(void)
+int	ft_putstr_fd(char *s, int fd)
 {
-	int *ptr = NULL;
-	*ptr = 42;
-	return (0);
+	int	count;
+
+	count = 0;
+	if (!s)
+		return (ft_putstr_fd("(null)", 2));
+	while (*s)
+	{
+		count += ft_putchar_fd(*s, fd);
+		s++;
+	}
+	return (count);
 }

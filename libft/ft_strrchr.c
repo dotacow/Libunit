@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_sigsev.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 16:32:04 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/19 15:40:11 by yokitane         ###   ########.fr       */
+/*   Created: 2024/08/30 15:43:38 by yokitane          #+#    #+#             */
+/*   Updated: 2024/08/30 16:51:25 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int signal_test(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	int *ptr = NULL;
-	*ptr = 42;
-	return (0);
+	char	*temp;
+	char	*rtr;
+	int		len;
+
+	len = ft_strlen(s) + 1;
+	rtr = NULL;
+	temp = (char *)s;
+	while (len--)
+	{
+		if (*temp == (char)c)
+			rtr = temp;
+		temp++;
+	}
+	return (rtr);
 }
