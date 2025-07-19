@@ -32,8 +32,8 @@ static int	check_for_newline(int fd)
 
 int	no_newline(void)
 {
-	int		fd;
-	int		result;
+	int	fd;
+	int	result;
 
 	fd = open("txtfiles/newlines.txt", O_RDONLY);
 	if (fd < 0)
@@ -42,4 +42,3 @@ int	no_newline(void)
 	close(fd);
 	return (result);
 }
-

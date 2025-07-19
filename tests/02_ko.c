@@ -6,11 +6,11 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:31:40 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:31:53 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:05:08 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ko_test(void)
+int	ko_test(void)
 {
 	return (-1);
 }

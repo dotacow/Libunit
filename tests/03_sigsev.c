@@ -6,15 +6,17 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:32:04 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/19 15:40:11 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:05:50 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int signal_test(void)
+int	signal_test(void)
 {
-	int *ptr = NULL;
+	int	*ptr;
+
+	ptr = NULL;
 	*ptr = 42;
 	return (0);
 }

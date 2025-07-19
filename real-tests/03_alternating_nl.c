@@ -12,13 +12,13 @@
 
 #include "tests.h"
 
-int alternating_nl(void)
+int	alternating_nl(void)
 {
 	int		fd;
 	char	*line;
 	int		new_line;
 
-    new_line = 0;
+	new_line = 0;
 	fd = open("txtfiles/newlines.txt", O_RDONLY);
 	if (fd < 0)
 		return (-1);

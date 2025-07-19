@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_no_newline_at_end.c                             :+:      :+:    :+:   */
+/*   05_only_newline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salshaha <salshaha@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:09:56 by salshaha          #+#    #+#             */
-/*   Updated: 2025/07/19 12:10:55 by salshaha         ###   ########.fr       */
+/*   Updated: 2025/07/19 16:59:30 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_last_line_newline(int fd)
 {
 	char	*line;
 	char	*last;
-	
+
 	last = NULL;
 	line = get_next_line(fd);
 	while (line)
@@ -29,18 +29,18 @@ static int	check_last_line_newline(int fd)
 	if (!last)
 		return (1);
 	if (last[ft_strlen(last) - 1] != '\n')
-    {
-        free(last);
+	{
+		free(last);
 		return (1);
-    }
-    free(last);
+	}
+	free(last);
 	return (0);
 }
 
-int	no_newline_at_end(void)
+int	only_newline(void)
 {
-	int		fd;
-	int		result;
+	int	fd;
+	int	result;
 
 	fd = open("txtfiles/no_newline_at_end.txt", O_RDONLY);
 	if (fd < 0)

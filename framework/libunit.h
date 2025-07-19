@@ -6,22 +6,25 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:40:59 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/19 16:04:58 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:04:02 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include "../libft/libft.h"
-#include <stdio.h>
+#ifndef LIBUNIT_H
+# define LIBUNIT_H
+
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include "../libft/libft.h"
+# include <stdio.h>
 
 typedef struct s_unit_test
 {
-	int				(*f)(void);
-	int				silent;
-	char			*testname;
-	struct s_unit_test *next;
+	int					(*f)(void);
+	int					silent;
+	char				*testname;
+	struct s_unit_test	*next;
 }	t_unit_test;
 
 /**
@@ -30,7 +33,8 @@ typedef struct s_unit_test
  * @param f Pointer to the function to be tested.
  * @return 0 if successful, 1 if memory allocation fails.
  */
-int	load_test(t_unit_test *tests,char *testname, int (*f)(void),int silent);
+int		load_test(t_unit_test *tests,
+			char *testname, int (*f)(void), int silent);
 
 /**
  * Deletes the unit test structure and frees allocated memory.
@@ -44,4 +48,6 @@ void	delete_list(t_unit_test *tests);
  * @param test Pointer to the unit test structure.
  * @return 0 if all tests passed, -1 if any test failed.
 */
-int		launch_tests(t_unit_test *tests,char *testedname);
+int		launch_tests(t_unit_test *tests, char *testedname);
+
+#endif

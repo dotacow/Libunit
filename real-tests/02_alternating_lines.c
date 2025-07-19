@@ -38,18 +38,18 @@ int	alternating_lines(void)
 	int		fd;
 	char	*line;
 	int		result;
-    int     first_len;
+	int		first_len;
 
 	fd = open("txtfiles/alternating.txt", O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	line = get_next_line(fd);
 	if (!line)
-    {
-        close(fd);
+	{
+		close(fd);
 		return (0);
-    }
-    first_len = ft_strlen(line);
+	}
+	first_len = ft_strlen(line);
 	result = check_line_lengths(fd, first_len);
 	free(line);
 	close(fd);

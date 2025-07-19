@@ -6,14 +6,14 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:03:32 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/19 16:41:10 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:08:10 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
 #include "../framework/libunit.h"
+#include "tests.h"
 
-int gnl_launcher(void)
+int	gnl_launcher(void)
 {
 	t_unit_test	*tests;
 	int			ret;
@@ -23,26 +23,25 @@ int gnl_launcher(void)
 		return (1);
 	tests->next = NULL;
 	tests->silent = 0;
-	load_test(tests, "empty_file", &empty_file,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_nl",&alternating_nl,0);
-	load_test(tests,"no_newline",&no_newline,0);
-	load_test(tests,"no_newline_at_end",&no_newline_at_end,0);
-	load_test(tests,"newline_at_start",&newline_at_start,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,0);
-	load_test(tests,"alternating_lines",&alternating_lines,1);
-	load_test(tests,"alternating_lines",&alternating_lines,1);
-
-	ret = launch_tests(tests,"tester");
+	load_test(tests, "empty_file", &empty_file, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_nl", &alternating_nl, 0);
+	load_test(tests, "no_newline", &no_newline, 0);
+	load_test(tests, "no_newline_at_end", &only_newline, 0);
+	load_test(tests, "newline_at_start", &newline_at_start, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 0);
+	load_test(tests, "alternating_lines", &alternating_lines, 1);
+	load_test(tests, "alternating_lines", &alternating_lines, 1);
+	ret = launch_tests(tests, "tester");
 	delete_list(tests);
 	return (ret);
 }

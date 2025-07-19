@@ -20,18 +20,18 @@ static int	first_line_is_newline(int fd)
 	if (!line)
 		return (1);
 	if (line[0] == '\n')
-    {
-        free(line);
+	{
+		free(line);
 		return (0);
-    }
-    free(line);
+	}
+	free(line);
 	return (1);
 }
 
 int	newline_at_start(void)
 {
-	int		fd;
-	int		result;
+	int	fd;
+	int	result;
 
 	fd = open("txtfiles/newline_at_start.txt", O_RDONLY);
 	if (fd < 0)
