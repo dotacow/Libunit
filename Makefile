@@ -2,7 +2,7 @@
 all: tests realtests
 
 allclean: testsclean realtestsclean
-allmake: testmake realtestsmake
+allmake: testsmake realtestsmake
 allfclean: testsfclean realtestsfclean
 allre: testsre realtestsre
 
