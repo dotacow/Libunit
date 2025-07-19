@@ -6,12 +6,11 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 22:26:04 by salshaha          #+#    #+#             */
-/*   Updated: 2025/07/19 17:25:27 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:49:59 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
-#include <stdio.h>
 
 int	alternating_nl(void)
 {
