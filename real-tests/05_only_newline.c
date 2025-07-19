@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:09:56 by salshaha          #+#    #+#             */
-/*   Updated: 2025/07/19 16:59:30 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:21:27 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	only_newline(void)
 	int	fd;
 	int	result;
 
-	fd = open("txtfiles/no_newline_at_end.txt", O_RDONLY);
+	fd = open("txtfiles/only_newline.txt", O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	result = check_last_line_newline(fd);

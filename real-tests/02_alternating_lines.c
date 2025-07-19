@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:13:27 by salshaha          #+#    #+#             */
-/*   Updated: 2025/07/19 16:35:53 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:23:56 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	alternating_lines(void)
 	int		result;
 	int		first_len;
 
-	fd = open("txtfiles/alternating.txt", O_RDONLY);
+	fd = open("txtfiles/alternating_line.txt", O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	line = get_next_line(fd);

@@ -7,24 +7,24 @@ allfclean: testsfclean realtestsfclean
 allre: testsre realtestsre
 
 testsclean:
-	make -C clean tests
+	make clean -C tests
 testsmake:
-	make -C all tests
+	make all -C tests
 testsfclean:
-	make -C fclean tests
+	make fclean -C tests
 testsre:
-	make -C re tests
+	make re -C tests
 tests:
 	make test -C tests
 
 realtestsclean:
-	make -C clean realtests
+	make  clean -C real-tests
 realtestsmake:
-	make -C all realtests
+	make  all -C real-tests
 realtestsfclean:
-	make -C fclean realtests
+	make  fclean -C real-tests
 realtestsre:
-	make -C re realtests
+	make  re -C real-tests
 
 realtests:
 	make test -C real-tests
