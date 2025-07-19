@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:46:30 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 16:48:39 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:13:24 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
-int ft_strlen(char *s)
+
+int my_strlen(char *s)
 {
     int i = 0;
     while (s[i])
@@ -25,7 +23,7 @@ int ft_strlen(char *s)
     return (i);
 }
 // joins two strings together before \n
-char *ft_strjoin(char *s1, char *s2)
+char *my_strjoin(char *s1, char *s2)
 {
     char *res; // return value
     int len1;
@@ -34,8 +32,8 @@ char *ft_strjoin(char *s1, char *s2)
     int j;
     if (!s1 || !s2)
         return (NULL);
-    len1 = ft_strlen(s1);
-    len2 = ft_strlen(s2);
+    len1 = my_strlen(s1);
+    len2 = my_strlen(s2);
     res = malloc(len1 + len2 + 1);
     if (!res)
         return (NULL);
@@ -58,7 +56,7 @@ char *ft_strjoin(char *s1, char *s2)
 char *join_str(char *res, char *buffer)
 {
     char *tmp; // temporary pointer to store the result of joining res and buffer
-    tmp = ft_strjoin(res, buffer);
+    tmp = my_strjoin(res, buffer);
     if (!tmp)
     {
         free(res);
@@ -68,7 +66,7 @@ char *join_str(char *res, char *buffer)
     free(res);
     return (tmp);
 }
-int ft_strchr(const char *s, char c)
+int my_strchr(const char *s, char c)
 {
     int i = 0;
     while (s[i] != '\0')
@@ -115,7 +113,7 @@ char *read_line(int fd, char *res) // res holds what was read so far // it reads
             free(buffer);
             return (NULL);
         }
-        if (ft_strchr(buffer, '\n'))
+        if (my_strchr(buffer, '\n'))
             break ;
     }
     free(buffer);
@@ -167,7 +165,7 @@ char *set_next(char *buffer)
         buffer = NULL;
         return (NULL);
     }
-    line = malloc(ft_strlen(buffer) - i + 1);
+    line = malloc(my_strlen(buffer) - i + 1);
     if (!line)
     {
         free(buffer);
@@ -181,29 +179,24 @@ char *set_next(char *buffer)
     free(buffer);
     return (line);
 }
-char *get_next_line(int fd) // it reads from fd
+
+char *get_next_line(int fd)
 {
-    static char *buffer;
-    char *line; // until /n
-    if (fd < 0 || BUFFER_SIZE <= 0)
-        return (NULL);
-    buffer = read_line(fd, buffer);
-    if (!buffer)
-        return (NULL);
-    line = set_line(buffer);
-    if (!line)
-    {
-        free(buffer);
-        buffer = NULL;
-        return (NULL);
-    }
-    buffer = set_next(buffer);
-    return (line);
+	static char *buffer;
+	char *line;
+
+	 if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buffer = read_line(fd, buffer);
+	if (!buffer)
+		return (NULL);
+	line = set_line(buffer);
+	if (!line)
+	{
+		free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
+	buffer = set_next(buffer);
+	return (line);
 }
-
-
-
-
-
-
-

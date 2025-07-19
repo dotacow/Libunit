@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_launcher.c                                      :+:      :+:    :+:   */
+/*   07_single_character_nl.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 15:03:32 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/18 18:37:59 by amashhad         ###   ########.fr       */
+/*   Created: 2025/07/19 12:35:10 by amashhad          #+#    #+#             */
+/*   Updated: 2025/07/19 17:17:14 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
-#include "../framework/libunit.h"
 
-int test_launcher(void)
+int single_character_nl(void)
 {
-	t_unit_test	*tests;
-	int			ret;
+	int fd;
+	char *line;
 
-	tests = malloc(sizeof(t_unit_test));
-	if (!tests)
+	fd = open("txtfiles/single_character_nl.txt", O_RDONLY);
+	if (fd < 0)
 		return (1);
-	tests->next = NULL;
-	load_test(tests, "ok_test", ok_test);
-	load_test(tests, "ko_test", ko_test);
-	load_test(tests, "signal_test", signal_test);
-	ret = launch_tests(tests,"tester");
-	delete_list(tests);
-	return (ret);
+	line = get_next_line(fd);
+	if (!line || line[1] != '\n')
+	{
+		close(fd);
+		return (1);
+	}
+	free(line);
+	line = get_next_line(fd);
+	if (line)
+	{
+		free(line);
+		close(fd);
+		return (1);
+	}
+	close(fd);
+	return (0);
 }

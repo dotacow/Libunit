@@ -8,7 +8,7 @@ LIBFT     = $(LIBFTDIR)/libft.a
 CC        = cc
 CFLAGS    = -Wall -Wextra -Werror -I$(LIBUDIR) -I$(LIBFTDIR) -g
 
-SRCS      = gnl.c main.c 00_launcher.c 01_empty_file.c
+SRCS      = gnl.c main.c 00_launcher.c 01_empty_file.c 08_big_file.c 07_single_character_nl.c 09_buffer_size_less_zero.c 10_buffer_size_zero.c 11_buffer_size_one.c
 OBJS      = $(addprefix $(ODIR)/,$(SRCS:.c=.o))
 NAME      = tester
 

@@ -6,7 +6,7 @@ LIBU      = $(LIBUDIR)/libunit.a
 LIBFT     = $(LIBFTDIR)/libft.a
 
 CC        = cc
-CFLAGS    = -Wall -Wextra -Werror -I$(LIBUDIR) -I$(LIBFTDIR)
+CFLAGS    = -Wall -Wextra -Werror -I$(LIBUDIR) -I$(LIBFTDIR) -g
 
 SRCS      = main.c 00_launcher.c 01_ok.c 02_ko.c 03_sigsev.c
 OBJS      = $(addprefix $(ODIR)/,$(SRCS:.c=.o))
